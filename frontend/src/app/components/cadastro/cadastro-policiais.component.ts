@@ -22,7 +22,8 @@ export class CadastroPoliciaisComponent {
   constructor(private fb: FormBuilder, private service: PoliciaisService) {
     this.form = this.fb.group({
       rg_civil: ['', Validators.required],
-      rg_militar: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]],
+      // RG_MILITAR minimo de 3 numeros 
+      rg_militar: ['', [Validators.minLength(3), Validators.required, Validators.pattern(/^\d{11}$/)]], 
       cpf: ['', Validators.required],
       data_nascimento: ['', Validators.required],
       matricula: ['', Validators.required]
@@ -30,7 +31,7 @@ export class CadastroPoliciaisComponent {
   }
 
   // modal usado do showSwal, coloquei na pasta Share. 
-  
+
   onSubmit() {
     if (this.form.valid) {
       this.service.cadastrarPolicial(this.form.value).subscribe({

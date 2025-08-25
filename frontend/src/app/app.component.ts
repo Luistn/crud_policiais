@@ -6,10 +6,9 @@ import { ListaPoliciaisComponent } from './components/lista/lista-policiais.comp
   selector: 'app-root',
   imports: [CadastroPoliciaisComponent, ListaPoliciaisComponent],
   template: `<app-cadastro-policiais />,
-  <app-lista-policiais />
+              <app-lista-policiais />
 `
 
 })
 export class AppComponent {
-  title = 'frontend';
 }

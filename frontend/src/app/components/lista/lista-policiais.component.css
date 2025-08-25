@@ -1,1 +1,33 @@
 .erro { color: red; margin-top: 10px; }
+
+/* Estilo para os botões do filtro */
+.filtro-form button {
+	min-width: 110px;
+	font-weight: 500;
+	margin-bottom: 4px;
+	margin-right: 6px;
+	border-radius: 6px;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+	transition: background 0.2s, color 0.2s;
+}
+.filtro-form button[type="submit"] {
+	background: #1976d2;
+	color: #fff;
+}
+.filtro-form button[type="submit"]:hover {
+	background: #1256a3;
+}
+.filtro-form button[type="button"] {
+	background: #e3e3e3;
+	color: #222;
+}
+.filtro-form button[type="button"]:hover {
+	background: #bdbdbd;
+}
+
+/* Botão de ação na tabela (se houver) */
+.mat-table button {
+	min-width: 80px;
+	margin: 0 2px;
+	border-radius: 5px;
+}

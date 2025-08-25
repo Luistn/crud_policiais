@@ -22,8 +22,7 @@ export class ListaPoliciaisComponent implements OnInit {
 
   constructor(private service: PoliciaisService, private fb: FormBuilder) {
     this.filtroForm = this.fb.group({
-      cpf: [''],
-      rg: ['']
+      termo: ['']
     });
   }
 
@@ -32,27 +31,25 @@ export class ListaPoliciaisComponent implements OnInit {
   }
 
   carregar() {
-    const filtro: any = {};
-    const cpf = this.filtroForm.value.cpf?.trim();
-    const rg = this.filtroForm.value.rg?.trim();
-    if (cpf && rg) {
-      // Filtra por ambos: retorna apenas quem tem CPF E RG iguais aos informados
-      this.service.listarPoliciais({ cpf, rg }).subscribe({
+    const termo = this.filtroForm.value.termo?.trim();
+    if (termo) {
+      // Tenta buscar por CPF primeiro, se não encontrar, busca por RG
+      this.service.listarPoliciais({ cpf: termo }).subscribe({
         next: data => {
-          // Filtra localmente para garantir ambos
-          this.policiais = data.filter(p => p.cpf === cpf && (p.rg_civil === rg || p.rg_militar === rg));
-          this.mensagem = '';
+          if (data && data.length > 0) {
+            this.policiais = data;
+            this.mensagem = '';
+          } else {
+            // Se não achou por CPF, tenta por RG
+            this.service.listarPoliciais({ rg: termo }).subscribe({
+              next: data2 => {
+                this.policiais = data2;
+                this.mensagem = '';
+              },
+              error: err2 => { this.mensagem = err2; }
+            });
+          }
         },
-        error: err => { this.mensagem = err; }
-      });
-    } else if (cpf) {
-      this.service.listarPoliciais({ cpf }).subscribe({
-        next: data => { this.policiais = data; this.mensagem = ''; },
-        error: err => { this.mensagem = err; }
-      });
-    } else if (rg) {
-      this.service.listarPoliciais({ rg }).subscribe({
-        next: data => { this.policiais = data; this.mensagem = ''; },
         error: err => { this.mensagem = err; }
       });
     } else {
