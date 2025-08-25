@@ -17,7 +17,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 export class ListaPoliciaisComponent implements OnInit {
   policiais: Policial[] = [];
   mensagem = '';
-  displayedColumns = ['rg_civil', 'rg_militar', 'cpf', 'data_nascimento', 'matricula'];
+  displayedColumns = ['rg_civil', 'rg_militar', 'cpf', 'data_nascimento', 'matricula', 'acoes'];
   filtroForm;
 
   constructor(private service: PoliciaisService, private fb: FormBuilder) {
@@ -62,5 +62,14 @@ export class ListaPoliciaisComponent implements OnInit {
   limparFiltro() {
     this.filtroForm.reset();
     this.carregar();
+  }
+
+  deletar(id: number) {
+    if (confirm('Tem certeza que deseja deletar?')) {
+      this.service.deletarPolicial(id).subscribe(() => this.carregar());
+    }
+  }
+
+  editar(policial: Policial) {
   }
 }

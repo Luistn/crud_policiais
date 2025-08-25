@@ -73,4 +73,14 @@ module.exports = {
       res.status(500).json({ error: "Erro ao listar policiais." });
     }
   },
+
+  async deletarPolicial(req, res) {
+    try {
+      const { id } = req.params;
+      await db.query("DELETE FROM policiais WHERE id = ?", [id]);
+      res.status(204).send();
+    } catch (err) {
+      res.status(500).json({ error: "Erro ao deletar policial." });
+    }
+  },
 };

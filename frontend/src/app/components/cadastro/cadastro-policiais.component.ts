@@ -23,7 +23,7 @@ export class CadastroPoliciaisComponent {
     this.form = this.fb.group({
       rg_civil: ['', Validators.required],
       // RG_MILITAR minimo de 3 numeros 
-      rg_militar: ['', [Validators.minLength(3), Validators.required, Validators.pattern(/^\d{11}$/)]], 
+      rg_militar: ['', [Validators.required, Validators.pattern(/^\d+$/), Validators.minLength(3)]],
       cpf: ['', Validators.required],
       data_nascimento: ['', Validators.required],
       matricula: ['', Validators.required]

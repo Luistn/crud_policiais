@@ -33,6 +33,14 @@ export class PoliciaisService {
     );
   }
 
+  deletarPolicial(id: number) {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  editarPolicial(id: number, dados: Partial<Policial>) {
+    return this.http.put(`${this.apiUrl}/${id}`, dados);
+  }
+
   private handleError(error: HttpErrorResponse) {
     return throwError(() => error.error?.error || 'Erro de comunicação com o servidor.');
   }
