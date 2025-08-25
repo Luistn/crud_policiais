@@ -5,7 +5,8 @@ import { ListaPoliciaisComponent } from './components/lista/lista-policiais.comp
 @Component({
   selector: 'app-root',
   imports: [CadastroPoliciaisComponent, ListaPoliciaisComponent],
-  template: `<app-cadastro-policiais />,
+  template: `
+            <app-cadastro-policiais />,
               <app-lista-policiais />
 `
 
