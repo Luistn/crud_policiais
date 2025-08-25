@@ -33,6 +33,7 @@ export class ListaPoliciaisComponent implements OnInit {
 
   carregar() {
     const termo = this.filtroForm.value.termo?.trim();
+    this.mensagem = '';
     if (termo) {
       // Tenta buscar por CPF primeiro, se não encontrar, busca por RG
       this.service.listarPoliciais({ cpf: termo }).subscribe({
@@ -45,18 +46,38 @@ export class ListaPoliciaisComponent implements OnInit {
             this.service.listarPoliciais({ rg: termo }).subscribe({
               next: data2 => {
                 this.policiais = data2;
-                this.mensagem = '';
+                if (!data2 || data2.length === 0) {
+                  this.mensagem = 'Nenhum policial encontrado para o termo informado.';
+                } else {
+                  this.mensagem = '';
+                }
               },
-              error: err2 => { this.mensagem = err2; }
+              error: err2 => {
+                this.mensagem = 'Erro ao buscar por RG. Tente novamente.';
+                console.error('Erro ao buscar por RG:', err2);
+              }
             });
           }
         },
-        error: err => { this.mensagem = err; }
+        error: err => {
+          this.mensagem = 'Erro ao buscar por CPF. Tente novamente.';
+          console.error('Erro ao buscar por CPF:', err);
+        }
       });
     } else {
       this.service.listarPoliciais().subscribe({
-        next: data => { this.policiais = data; this.mensagem = ''; },
-        error: err => { this.mensagem = err; }
+        next: data => {
+          this.policiais = data;
+          if (!data || data.length === 0) {
+            this.mensagem = 'Nenhum policial cadastrado.';
+          } else {
+            this.mensagem = '';
+          }
+        },
+        error: err => {
+          this.mensagem = 'Erro ao carregar policiais. Tente novamente.';
+          console.error('Erro ao carregar policiais:', err);
+        }
       });
     }
   }
@@ -67,7 +88,13 @@ export class ListaPoliciaisComponent implements OnInit {
 
   deletar(id: number) {
     if (confirm('Tem certeza que deseja deletar?')) {
-      this.service.deletarPolicial(id).subscribe(() => this.carregar());
+      this.service.deletarPolicial(id).subscribe({
+        next: () => this.carregar(),
+        error: err => {
+          this.mensagem = 'Erro ao deletar policial. Tente novamente.';
+          console.error('Erro ao deletar policial:', err);
+        }
+      });
     }
   }
 
