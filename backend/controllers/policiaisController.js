@@ -1,4 +1,4 @@
-const { db } = require('../app');
+const { db } = require('../db');
 const { cpf: cpfValidator } = require('cpf-cnpj-validator');
 const bcrypt = require('bcrypt');
 
@@ -48,7 +48,7 @@ module.exports = {
   async listarPoliciais(req, res) {
     try {
       const { cpf, rg } = req.query;
-      let query = 'SELECT id, rg_civil, rg_militar, cpf, data_nascimento, matricula FROM policiais';
+  let query = 'SELECT id, rg_civil, rg_militar, cpf, DATE_FORMAT(data_nascimento, "%Y-%m-%d") as data_nascimento, matricula FROM policiais';
       let params = [];
 
       if (cpf) {
