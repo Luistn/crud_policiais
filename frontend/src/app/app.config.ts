@@ -1,8 +1,14 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
-import { routes } from './app.routes';
+import { provideHttpClient } from '@angular/common/http';
+import { CadastroPoliciaisComponent } from './components/cadastro/cadastro-policiais.component';
+import { ListaPoliciaisComponent } from './components/lista/lista-policiais.component';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes)]
+  providers: [
+    provideRouter([
+      { path: '', component: CadastroPoliciaisComponent },
+      { path: 'lista', component: ListaPoliciaisComponent }
+    ])
+  ]
 };

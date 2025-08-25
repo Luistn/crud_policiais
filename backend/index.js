@@ -1,4 +1,4 @@
-const { app } = require('./db');
+const { app } = require('./app');
 const policiaisRoutes = require('./rotas/policiais');
 
 app.use('/', policiaisRoutes);

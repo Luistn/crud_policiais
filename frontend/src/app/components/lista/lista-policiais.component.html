@@ -1,1 +1,37 @@
-<p>lista-policiais works!</p>
+<div class="lista-container">
+  <form [formGroup]="filtroForm" class="filtro-form" (ngSubmit)="carregar()">
+    <mat-form-field>
+      <input matInput placeholder="Filtrar por CPF" formControlName="cpf">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Filtrar por RG" formControlName="rg">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Filtrar</button>
+    <button mat-button type="button" (click)="limparFiltro()">Limpar</button>
+  </form>
+  <table mat-table [dataSource]="policiais" class="mat-elevation-z8" *ngIf="policiais.length">
+    <ng-container matColumnDef="rg_civil">
+      <th mat-header-cell *matHeaderCellDef>RG Civil</th>
+      <td mat-cell *matCellDef="let p">{{p.rg_civil}}</td>
+    </ng-container>
+    <ng-container matColumnDef="rg_militar">
+      <th mat-header-cell *matHeaderCellDef>RG Militar</th>
+      <td mat-cell *matCellDef="let p">{{p.rg_militar}}</td>
+    </ng-container>
+    <ng-container matColumnDef="cpf">
+      <th mat-header-cell *matHeaderCellDef>CPF</th>
+      <td mat-cell *matCellDef="let p">{{p.cpf}}</td>
+    </ng-container>
+    <ng-container matColumnDef="data_nascimento">
+      <th mat-header-cell *matHeaderCellDef>Data Nascimento</th>
+      <td mat-cell *matCellDef="let p">{{p.data_nascimento}}</td>
+    </ng-container>
+    <ng-container matColumnDef="matricula">
+      <th mat-header-cell *matHeaderCellDef>Matrícula</th>
+      <td mat-cell *matCellDef="let p">{{p.matricula}}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div *ngIf="mensagem" class="erro">{{mensagem}}</div>
+</div>

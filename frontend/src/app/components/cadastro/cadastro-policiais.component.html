@@ -1,1 +1,30 @@
-<p>cadastro-policiais works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+  <mat-form-field>
+    <input matInput placeholder="RG Civil" formControlName="rg_civil" required>
+    <mat-error *ngIf="form.get('rg_civil')?.hasError('required')">Obrigatório</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="RG Militar" formControlName="rg_militar" required>
+    <mat-error *ngIf="form.get('rg_militar')?.hasError('required')">Obrigatório</mat-error>
+    <mat-error *ngIf="form.get('rg_militar')?.hasError('pattern')">RG inválido</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="CPF" formControlName="cpf" required>
+    <mat-error *ngIf="form.get('cpf')?.hasError('required')">Obrigatório</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="date" placeholder="Data de Nascimento" formControlName="data_nascimento" required>
+    <mat-error *ngIf="form.get('data_nascimento')?.hasError('required')">Obrigatório</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Matrícula" formControlName="matricula" required>
+    <mat-error *ngIf="form.get('matricula')?.hasError('required')">Obrigatório</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Cadastrar</button>
+  <div *ngIf="mensagem" [ngClass]="{'erro': erro, 'sucesso': !erro}">{{mensagem}}</div>
+</form>
