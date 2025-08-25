@@ -21,7 +21,7 @@
     <mat-error *ngIf="form.get('data_nascimento')?.hasError('required')">Obrigatório</mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field class="matricula-menor">
     <input matInput placeholder="Matrícula" formControlName="matricula" required>
     <mat-error *ngIf="form.get('matricula')?.hasError('required')">Obrigatório</mat-error>
   </mat-form-field>

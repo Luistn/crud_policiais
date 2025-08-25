@@ -5,12 +5,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-lista-policiais',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatButtonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule],
+  imports: [CommonModule, MatTableModule, MatButtonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatIconModule],
   templateUrl: './lista-policiais.component.html',
   styleUrls: ['./lista-policiais.component.css']
 })

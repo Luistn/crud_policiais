@@ -1,3 +1,21 @@
+.linha-filtro {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 18px;
+}
+.linha-filtro button[mat-icon-button] {
+	margin-right: 12px;
+	min-width: 36px;
+	min-height: 36px;
+	width: 36px;
+	height: 36px;
+	color: #1976d2;
+}
+.linha-filtro button[mat-icon-button]:hover {
+	background: #e3e3e3;
+}
 .erro { color: red; margin-top: 10px; }
 
 .lista-container {

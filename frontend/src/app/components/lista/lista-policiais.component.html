@@ -1,11 +1,16 @@
 <div class="lista-container">
-  <form [formGroup]="filtroForm" class="filtro-form filtro-direita" (ngSubmit)="carregar()">
-    <mat-form-field class="filtro-menor">
-      <input matInput placeholder="Filtrar por CPF ou RG" formControlName="termo">
-    </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Filtrar</button>
-    <button mat-button type="button" (click)="limparFiltro()">Limpar</button>
-  </form>
+  <div class="linha-filtro">
+  <button mat-icon-button type="button" (click)="carregar()" aria-label="Atualizar lista">
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <form [formGroup]="filtroForm" class="filtro-form filtro-direita" (ngSubmit)="carregar()">
+      <mat-form-field class="filtro-menor">
+        <input matInput placeholder="Filtrar por CPF ou RG" formControlName="termo">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Filtrar</button>
+      <button mat-button type="button" (click)="limparFiltro()">Limpar</button>
+    </form>
+  </div>
   <table mat-table [dataSource]="policiais" class="mat-elevation-z8" *ngIf="policiais.length">
     <ng-container matColumnDef="rg_civil">
       <th mat-header-cell *matHeaderCellDef>RG Civil</th>
