@@ -21,9 +21,9 @@ module.exports = {
 
       // descomentar aqui pra usar com o CPF VALIDATOR, apensar comentado para testar.
 
-      //   if (!isValidCPF(rg_militar)) {
-      //     return res.status(400).json({ error: 'RG Militar deve ser válido.' });
-      //   }
+        // if (!isValidCPF(cpf)) {
+        //   return res.status(400).json({ error: 'CPF Militar deve ser válido.' });
+        // }
 
       const [rows] = await db.query(
         "SELECT id FROM policiais WHERE rg_civil = ? OR rg_militar = ?",
